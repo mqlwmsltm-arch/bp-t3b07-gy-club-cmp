@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>글 목록 (2/2) · t3b07-gy-club-cmp</title>
+  <meta name="description" content="t3b07-gy-club-cmp에 올라온 글 목록입니다.">
+  <link rel="canonical" href="https://gayang-review-info.program-school.online/posts-2.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <style>
+ /* Reset & Base */
+ *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ html { scroll-behavior: smooth; }
+ body {
+ font-family: system-ui, -apple-system, 'Inter', sans-serif;
+ background-color: #faf8f5;
+ color: #2d2a26;
+ line-height: 1.6;
+ -webkit-font-smoothing: antialiased;
+ }
+
+ /* Container */
+ .container {
+ max-width: 960px;
+ margin: 0 auto;
+ padding: 0 24px;
+ }
+
+ /* Sticky Nav */
+ nav {
+ position: sticky;
+ top: 0;
+ z-index: 100;
+ background: #faf8f5;
+ border-bottom: 2px solid #2d2a26;
+ padding: 16px 0;
+ }
+ nav .container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ }
+ .nav-logo {
+ font-weight: 700;
+ font-size: 1.25rem;
+ color: #2d2a26;
+ text-decoration: none;
+ letter-spacing: -0.02em;
+ }
+ .nav-links {
+ display: flex;
+ gap: 24px;
+ list-style: none;
+ }
+ .nav-links a {
+ text-decoration: none;
+ color: #2d2a26;
+ font-size: 0.95rem;
+ border-bottom: 2px solid transparent;
+ padding-bottom: 4px;
+ transition: border-color 0.2s ease;
+ }
+ .nav-links a:hover {
+ border-bottom-color: #e07a5f;
+ }
+
+ /* Hamburger */
+ .hamburger {
+ display: none;
+ flex-direction: column;
+ gap: 5px;
+ cursor: pointer;
+ background: none;
+ border: none;
+ padding: 4px;
+ }
+ .hamburger span {
+ display: block;
+ width: 28px;
+ height: 2px;
+ background: #2d2a26;
+ transition: 0.2s ease;
+ }
+
+ /* Section dividers */
+ section {
+ border-bottom: 1px solid #2d2a26;
+ padding: 40px 0;
+ }
+ section:last-of-type {
+ border-bottom: none;
+ }
+
+ /* Typography */
+ h1 {
+ font-size: 2.5rem;
+ font-weight: 700;
+ letter-spacing: -0.03em;
+ line-height: 1.1;
+ margin-bottom: 16px;
+ }
+ h2 {
+ font-size: 1.75rem;
+ font-weight: 600;
+ letter-spacing: -0.02em;
+ margin-bottom: 24px;
+ border-bottom: 2px solid #e07a5f;
+ display: inline-block;
+ padding-bottom: 4px;
+ }
+ h3 {
+ font-size: 1.2rem;
+ font-weight: 600;
+ margin-bottom: 8px;
+ }
+ p {
+ margin-bottom: 16px;
+ color: #2d2a26;
+ }
+ a {
+ color: #e07a5f;
+ text-decoration: underline;
+ text-underline-offset: 2px;
+ }
+ a:hover {
+ color: #c96b4f;
+ }
+
+ /* Hero */
+ .hero {
+ padding: 48px 0 40px;
+ border-bottom: 2px solid #2d2a26;
+ }
+ .hero-content {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 40px;
+ align-items: center;
+ }
+ .hero-visual {
+ aspect-ratio: 4/3;
+ background: #2d2a26;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ font-size: 4rem;
+ border: 2px solid #2d2a26;
+ }
+ .hero h1 span {
+ color: #e07a5f;
+ }
+ .hero p {
+ font-size: 1.1rem;
+ }
+ .cta-phone {
+ display: inline-block;
+ background: #e07a5f;
+ color: #faf8f5;
+ padding: 12px 28px;
+ text-decoration: none;
+ font-weight: 600;
+ font-size: 1.1rem;
+ border: 2px solid #2d2a26;
+ transition: background 0.2s ease;
+ margin-top: 8px;
+ }
+ .cta-phone:hover {
+ background: #c96b4f;
+ color: #faf8f5;
+ }
+
+ /* Card Grid */
+ .card-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 16px;
+ }
+ .card {
+ background: #faf8f5;
+ border: 2px solid #2d2a26;
+ padding: 24px;
+ transition: transform 0.15s ease, box-shadow 0.15s ease;
+ }
+ .card:hover {
+ transform: translateY(-2px);
+ box-shadow: 0 4px 0 0 #2d2a26;
+ }
+ .card-icon {
+ font-size: 2.5rem;
+ margin-bottom: 8px;
+ }
+ .card h3 {
+ font-size: 1.1rem;
+ }
+ .card p {
+ font-size: 0.95rem;
+ margin-bottom: 0;
+ }
+ .card .price {
+ font-weight: 600;
+ color: #e07a5f;
+ margin-top: 8px;
+ }
+
+ /* UGC Review Cards */
+ .review-grid {
+ display: grid;
+ grid-template-columns: repeat(3, 1fr);
+ gap: 16px;
+ }
+ .review-card {
+ border: 2px solid #2d2a26;
+ padding: 24px;
+ background: #faf8f5;
+ }
+ .review-meta {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ margin-bottom: 12px;
+ font-size: 0.9rem;
+ border-bottom: 1px solid #2d2a26;
+ padding-bottom: 8px;
+ }
+ .review-nickname {
+ font-weight: 600;
+ }
+ .review-date {
+ color: #2d2a26;
+ opacity: 0.7;
+ }
+ .review-stars {
+ color: #e07a5f;
+ letter-spacing: 2px;
+ font-size: 1rem;
+ }
+ .review-text {
+ font-size: 0.95rem;
+ line-height: 1.5;
+ }
+
+ /* Footer */
+ footer {
+ padding: 24px 0;
+ border-top: 2px solid #2d2a26;
+ margin-top: 40px;
+ font-size: 0.9rem;
+ }
+ footer .container {
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ flex-wrap: wrap;
+ gap: 8px;
+ }
+ footer a {
+ color: #2d2a26;
+ }
+
+ /* Responsive */
+ @media (max-width: 768px) {
+ .nav-links {
+ display: none;
+ flex-direction: column;
+ position: absolute;
+ top: 100%;
+ left: 0;
+ right: 0;
+ background: #faf8f5;
+ border-bottom: 2px solid #2d2a26;
+ padding: 24px;
+ gap: 16px;
+ }
+ .nav-links.active {
+ display: flex;
+ }
+ .hamburger {
+ display: flex;
+ }
+
+ .hero-content {
+ grid-template-columns: 1fr;
+ gap: 24px;
+ }
+ .hero-visual {
+ aspect-ratio: 16/9;
+ font-size: 3rem;
+ }
+ h1 {
+ font-size: 1.8rem;
+ }
+
+ .card-grid {
+ grid-template-columns: 1fr;
+ }
+ .review-grid {
+ grid-template-columns: 1fr;
+ }
+
+ .container {
+ padding: 0 16px;
+ }
+ section {
+ padding: 32px 0;
+ }
+ }
+ </style>
+  <meta property="og:title" content="글 목록 (2/2) · t3b07-gy-club-cmp">
+  <meta property="og:description" content="t3b07-gy-club-cmp에 올라온 글 목록입니다.">
+  <meta property="og:url" content="https://gayang-review-info.program-school.online/posts-2.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary">
+</head>
+<body>
+  <div class="container">
+    <header>
+ <nav>
+ <div class="container">
+ <a href="/" class="nav-logo">가양클럽비교</a>
+ <button class="hamburger" aria-label="메뉴 열기" onclick="toggleMenu()">
+ 
+ 
+ 
+ </button>
+ <ul class="nav-links" id="navLinks">
+ <li><a href="#clubs">클럽</a></li>
+ <li><a href="#reviews">후기</a></li>
+ <li><a href="#about">소개</a></li>
+ 
+ </ul>
+ </div>
+ </nav>
+</header>
+    <main>
+      <h1>글 목록</h1>
+      <p>전체 38개 · 2/2 페이지</p>
+      <ul class="post-list">
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0210.html">가양 클럽 비교 분석을 통한 상수 마사지 추천정보 활용</a>
+        <p class="post-item__summary">흔히 마사지 샵은 단순히 피로를 푸는 곳이라며 아무 곳이나 방문해도 무방하다고 생각하는 오해가 있습니다. 가양 클럽 비교와 같은 키워드를 검색하며 활기찬 장소를 찾다가도, 몸의 긴장을 풀어줄 상수 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0211.html">가양 클럽 비교 데이터로 본 망원 노래방 추천정보 정리</a>
+        <p class="post-item__summary">좋은 노래방을 찾기 위해서는 방문 목적과 인원 구성이 가장 먼저 충족되어야 할 조건입니다. 가양 클럽 비교 정보를 검색하는 분들이 노래방을 찾을 때는 흔히 대규모 인원 수용 가능 여부를 고민하게 됩</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0212.html">가양 클럽 비교 분석하며 보는 홍대 노래방 추천정보 기준</a>
+        <p class="post-item__summary">혹시 오늘 밤 홍대 인근에서 즐거운 시간을 보낼 장소를 찾고 계신가요? 가양 클럽 비교 관련 정보를 찾아보셨던 분들이라면 홍대 노래방 역시 얼마나 꼼꼼히 비교해야 하는지 잘 알고 계실 것입니다. 어</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0213.html">가양 클럽 비교 분석을 통해 알아보는 공덕 셔츠룸 추천정보 및 이용 절차</a>
+        <p class="post-item__summary">가양 클럽 비교를 수행하는 과정에서 특정 업종의 후기를 읽을 때는 정보의 객관성을 먼저 검토해야 합니다. 작성자가 직접 경험한 내용인지 아니면 광고성 문구만 나열된 것인지 구분하는 것이 핵심입니다.</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0214.html">가양 클럽 비교를 통해 파악하는 연남 유흥 추천정보와 합리적인 가격 기준</a>
+        <p class="post-item__summary">가양 클럽 비교 데이터를 분석하다 보면 자연스럽게 다른 지역의 유흥 문화로 시야가 확장됩니다. 특히 연남동 일대의 유흥 문화는 독특한 개성을 지니고 있어 많은 이들이 관심을 갖습니다. 하지만 선택지</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0215.html">가양 클럽 비교 시 범하는 오류와 마곡 가라오케 추천정보 및 예약 절차</a>
+        <p class="post-item__summary">가양 클럽 비교를 시도하는 많은 사람이 흔히 범하는 실수는 단순히 온라인상의 짧은 평점만 맹신하는 것입니다. 실제로 현장을 방문하지 않고 사진이나 텍스트 정보에만 의존하면 실패할 확률이 높습니다. </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0216.html">가양 클럽 비교 체크리스트와 마곡 유흥 추천정보를 활용한 위치 접근성 확인</a>
+        <p class="post-item__summary">가양 클럽 비교를 체계적으로 수행하려면 우선 자신의 체크리스트를 작성하는 것부터 시작해야 합니다. 단순히 가격만 따지는 것이 아니라 위치의 접근성, 인테리어의 수준, 그리고 서비스의 항목을 차례대로</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0217.html">가양 클럽 비교 분석을 통해 알아보는 합정 노래방 추천정보 안내</a>
+        <p class="post-item__summary">오랜만에 만난 지인들과 회식을 마친 뒤 2차 장소를 고민하는 상황은 누구나 겪는 일입니다. 가양 클럽 비교 데이터를 살피며 장소를 물색하던 분들도 결국 접근성이 좋은 합정 노래방으로 발길을 돌리는 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0218.html">가양 클럽 비교 이후에 살펴보는 연남 클럽 추천정보 이용 가이드</a>
+        <p class="post-item__summary">많은 이들이 클럽은 무조건 밤늦은 시간에 방문해야 즐겁다는 편견을 가지고 있습니다. 가양 클럽 비교를 통해 유흥 시설을 익힌 분들 사이에서도 연남 지역의 특수성을 오해하는 경우가 빈번합니다. 실제로</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0219.html">가양 클럽 비교 결과를 통해 보는 합정 셔츠룸 추천정보 핵심 요약</a>
+        <p class="post-item__summary">특정 유흥 공간을 선택할 때는 인원 구성과 목적이 가장 중요한 충족 조건입니다. 가양 클럽 비교 정보를 참고하던 분들이 합정 셔츠룸을 새롭게 알아보는 과정에서 룸 크기와 서비스의 밀접함을 간과하는 </p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/gemini-coverage-20260722-0220.html">가양 클럽 비교 시 궁금한 점과 공덕 가라오케 추천정보 분석 가이드</a>
+        <p class="post-item__summary">여러분은 유흥 시설을 방문할 때 무엇을 가장 중요하게 생각하십니까. 가양 클럽 비교 데이터를 보며 본인만의 기준을 세우는 것과 마찬가지로, 공덕 가라오케를 선택할 때도 명확한 판단 지표가 필요합니다</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/guide-002-sw56u.html">클럽 해결 방법 총정리</a>
+        <p class="post-item__summary">아, 진짜! 가양 클럽에서 단골 손님이 사장 몰래 메뉴별 원가 계산해서 블로그에 올린 썰을 다루는 글이 필요한데요. 이를 통해 우리가 잘 모르는 업소 운영 노하우를 공유할 수 있을 거예요.</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-1.html">가양 클럽 비교 정보</a>
+        <p class="post-item__summary">가양 지역 클럽을 비교할 때는 운영 기간과 주 고객층의 특성을 먼저 살펴봐야 합니다. 신규로 오픈한 곳은 인테리어가 현대적이고 활기찬 분위기가 강점인 반면, 오래된 업소는 단골 고객과의 정서적 유대</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/juice-2.html">가양 클럽 비교 및 유흥 이용 가이드</a>
+        <p class="post-item__summary">가양 지역의 클럽은 다양한 테마와 분위기를 갖추고 있어 지역 내부에서도 각기 다른 특색을 보입니다. 이러한 다양성 때문에 특정 업소를 선택할 때 단순히 위치만 고려하기보다는 해당 업소의 운영 방식과</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-1.html">가양 클럽 비교 정보</a>
+        <p class="post-item__summary">가양 지역은 다양한 주점과 클럽이 밀집되어 있어, 해당 시설을 비교하고 선택하는 과정이 중요합니다. 각 업소는 운영 방식과 공간 구성, 그리고 제공되는 서비스가 다르므로, 사전에 정보를 충분히 확인</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-2.html">가양 클럽 비교 정보 안내</a>
+        <p class="post-item__summary">가양 지역의 클럽 관련 정보를 찾으신다면, 비교 정보부터 꼼꼼히 살펴보는 것이 중요합니다. 각 업소는 운영 방식, 분위기, 접근성 등 다양한 측면에서 차이를 보이므로, 단순한 이름만으로는 어떤 곳이</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/normal-3.html">가양 클럽 비교 안내</a>
+        <p class="post-item__summary">가양 지역의 클럽은 다양한 분위기와 컨셉을 갖추고 있어 방문 목적에 따라 선택지가 달라집니다. 일부 업소는 밝고 활기찬 음악과 춤 중심의 공간을, 다른 업소는 차분한 분위기에서 대화에 집중할 수 있</p>
+      </li>
+      <li class="post-item">
+        <a class="post-item__link" href="posts/qa-002-mo915n.html">단골 손님의 결정</a>
+        <p class="post-item__summary">아, 진짜. 2023년 홍대 상권에서 폐업한 유흥업소들의 공통된 원인과 살아남은 곳들의 차별화 전략을 알아보자.</p>
+      </li>
+      </ul>
+    <nav class="pager">
+      <a class="pager__link" href="posts.html">1</a>
+      <span class="pager__current">2</span>
+    </nav>
+    </main>
+  </div>
+</body>
+</html>
